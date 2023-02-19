@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quitanda/src/auth/sign_in_screen.dart';
-import 'package:quitanda/src/config/custom_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: CustomColors.customSwatColor,
+        primarySwatch: Colors.green,
       ),
       debugShowCheckedModeBanner: false,
       home: const SignInScreen(),
