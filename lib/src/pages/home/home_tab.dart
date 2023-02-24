@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quitanda/src/pages/home/components/item_title.dart';
 
-import '../config/custom_colors.dart';
+import '../../config/custom_colors.dart';
 import 'components/category_tile.dart';
+import 'package:quitanda/src/config/app_data.dart' as app_data;
 
 // ignore: must_be_immutable
 class HomeTab extends StatefulWidget {
@@ -12,14 +14,6 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
-  List<String> categoris = [
-    'Frutas',
-    'Legumes',
-    'Grãos',
-    'Temperos',
-    'Cereais',
-  ];
-
   String selectCategory = 'Frutas';
 
   @override
@@ -115,21 +109,37 @@ class _HomeTabState extends State<HomeTab> {
                 return CategoryTile(
                   onPressed: () {
                     setState(() {
-                      selectCategory = categoris[index];
+                      selectCategory = app_data.categoris[index];
                     });
                   },
-                  category: categoris[index],
-                  isSelect: categoris[index] == selectCategory,
+                  category: app_data.categoris[index],
+                  isSelect: app_data.categoris[index] == selectCategory,
                 );
               },
               separatorBuilder: (_, index) => const SizedBox(width: 10),
-              itemCount: categoris.length,
+              itemCount: app_data.categoris.length,
             ),
           ),
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+              physics: const BouncingScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 9 / 11.5,
+              ),
+              itemCount: app_data.items.length,
+              itemBuilder: (_, index) {
+                return ItemTitle(
+                  item: app_data.items[index],
+                );
+              },
+            ),
+          )
         ],
       ),
-
-      // grid
     );
   }
 }
